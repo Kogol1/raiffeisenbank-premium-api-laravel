@@ -1,12 +1,12 @@
 {
-    "name": "38778603-kogol1/raiffeisenbank-premium-api-laravel",
+    "name": "kogol1/raiffeisenbank-premium-api-laravel",
     "description": "Simple Raiffeisenbank premium API layer for Laravel (Bank accounts, Transactions)",
     "keywords": [
         "Kogol1",
         "laravel",
         "raiffeisenbank-premium-api-laravel"
     ],
-    "homepage": "https://github.com/38778603-kogol1/raiffeisenbank-premium-api-laravel",
+    "homepage": "https://github.com/Kogol1/raiffeisenbank-premium-api-laravel",
     "license": "MIT",
     "authors": [
         {
@@ -69,6 +69,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
