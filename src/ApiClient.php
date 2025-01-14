@@ -2,14 +2,15 @@
 
 namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Api\Transaction;
 
 class ApiClient
 {
     public string $baseUrl;
+
     public bool $sandbox;
 
     public function __construct()
@@ -33,7 +34,7 @@ class ApiClient
         return $accounts;
     }
 
-    public function getTransactions(string $accountNumber, string $currencyCode, string $from = null, string $to = null, int $page = null): Collection
+    public function getTransactions(string $accountNumber, string $currencyCode, ?string $from = null, ?string $to = null, ?int $page = null): Collection
     {
         if (empty($from)) {
             $from = now()->subMonth()->format('Y-m-d');
@@ -77,12 +78,11 @@ class ApiClient
             ])
             ->get($url);
 
-        //TODO: Handle Rate limiting
+        // TODO: Handle Rate limiting
 
         if ($response->failed()) {
             throw new \Exception('RB request failed');
         }
-
 
         return $response->json();
     }

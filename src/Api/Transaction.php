@@ -18,8 +18,7 @@ class Transaction
         public string $currency = 'CZK',
         public string $type = '',
         public string $message = '',
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $transaction): self
     {
@@ -40,8 +39,7 @@ class Transaction
         );
     }
 
-
-    public function storeTransaction(bool $notify = true): \App\Models\Transaction|null
+    public function storeTransaction(bool $notify = true): ?\App\Models\Transaction
     {
         if (\Kogol1\RaiffeisenbankPremiumApiLaravel\Models\Transaction::query()
             ->where('reference', $this->reference)

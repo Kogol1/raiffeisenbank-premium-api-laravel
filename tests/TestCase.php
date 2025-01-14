@@ -3,8 +3,8 @@
 namespace Kogol1\RaiffeisenbankPremiumApiLaravel\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\RaiffeisenbankPremiumApiLaravelServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

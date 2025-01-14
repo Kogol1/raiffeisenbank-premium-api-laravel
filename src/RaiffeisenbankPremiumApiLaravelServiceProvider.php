@@ -2,9 +2,9 @@
 
 namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Commands\RaiffeisenbankPremiumApiLaravelCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Commands\RaiffeisenbankPremiumApiLaravelCommand;
 
 class RaiffeisenbankPremiumApiLaravelServiceProvider extends PackageServiceProvider
 {
