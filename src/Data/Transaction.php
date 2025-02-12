@@ -38,40 +38,4 @@ class Transaction
             message: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['originatorMessage'],
         );
     }
-
-    public function storeTransaction(bool $notify = true): ?\App\Models\Transaction
-    {
-        if (\Kogol1\RaiffeisenbankPremiumApiLaravel\Models\Transaction::query()
-            ->where('reference', $this->reference)
-            ->exists()) {
-            return null;
-        }
-
-        $transaction = \Kogol1\RaiffeisenbankPremiumApiLaravel\Models\Transaction::create([
-            'reference' => $this->reference,
-            'bank_transaction_code' => $this->bankTransactionCode,
-
-            'amount' => $this->amount,
-            'currency' => $this->currency,
-            'payment_date' => $this->date,
-            'origin_account_holder_name' => $this->originAccountHolderName,
-            'origin_account_number' => $this->originAccount,
-            'destination_account_number' => '',
-            'message' => $this->message,
-            'variable_symbol' => $this->variableSymbol,
-            'constant_symbol' => $this->constantSymbol,
-            'specific_symbol' => $this->specificSymbol,
-            'origin_bank_code' => $this->originBankCode,
-            'destination_bank_code' => '',
-        ]);
-
-        $this->afterStore();
-
-        return $transaction;
-    }
-
-    public function afterStore(): void
-    {
-        // Override this method in your application, you can use it to send notifications or do other actions after the transaction is stored.
-    }
 }
