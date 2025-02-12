@@ -5,7 +5,10 @@ namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Api\Transaction;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\Transaction;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\BankAccount;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\CertificateIsInvalidException;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\RateLimitExceededException;
 
 class ApiClient
 {
@@ -36,9 +39,14 @@ class ApiClient
 
     public function getTransactions(string $accountNumber, string $currencyCode, ?string $from = null, ?string $to = null, ?int $page = null): Collection
     {
+        /** $from is required parameter, you can see only transaction which are not older than 90 days */
         if (empty($from)) {
             $from = now()->subMonth()->format('Y-m-d');
+        } elseif (now()->diffInDays($from) > 90) {
+            throw new \Exception('You can see only transaction which are not older than 90 days');
         }
+
+        /** $to is required parameter */
         if (empty($to)) {
             $to = now()->format('Y-m-d');
         }
@@ -60,7 +68,7 @@ class ApiClient
         return $transactions;
     }
 
-    private function get($url): array
+    private function get($url)
     {
         $url = str_replace('%environment%', $this->sandbox ? 'mock' : 'api', $url);
 
@@ -78,10 +86,13 @@ class ApiClient
             ])
             ->get($url);
 
-        // TODO: Handle Rate limiting
-
         if ($response->failed()) {
-            throw new \Exception('RB request failed');
+            match ($response->status()) {
+                401 => throw new CertificateIsInvalidException(),
+                403 => throw new \Exception('No access rights to perform the operation.'),
+                429 => throw new RateLimitExceededException(),
+                default => throw new \Exception("RB request failed: ".$response->json('error')),
+            };
         }
 
         return $response->json();

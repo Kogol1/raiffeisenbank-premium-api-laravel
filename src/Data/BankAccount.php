@@ -1,9 +1,9 @@
 <?php
 
-namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
+namespace Kogol1\RaiffeisenbankPremiumApiLaravel\Data;
 
 use Illuminate\Support\Collection;
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Api\Transaction;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\ApiClient;
 
 class BankAccount
 {
@@ -26,13 +26,10 @@ class BankAccount
         return $this;
     }
 
-    public function getTransactions(?ApiClient $apiClient = null): self
+    public function getTransactions(?string $from = null, ?string $to = null, ?int $page = null): self
     {
-        if ($apiClient === null) {
-            $apiClient = new ApiClient;
-        }
 
-        $this->transactions = $apiClient->getTransactions($this->accountNumber, 'CZK');
+        $this->transactions = (new ApiClient)->getTransactions($this->accountNumber, 'CZK',$from, $to, $page);
 
         return $this;
     }

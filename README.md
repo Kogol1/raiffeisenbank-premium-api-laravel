@@ -1,23 +1,29 @@
 # Simple Raiffeisenbank premium API layer for Laravel (Bank accounts, Transactions)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/38778603-kogol1/raiffeisenbank-premium-api-laravel.svg?style=flat-square)](https://packagist.org/packages/38778603-kogol1/raiffeisenbank-premium-api-laravel)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/38778603-kogol1/raiffeisenbank-premium-api-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/38778603-kogol1/raiffeisenbank-premium-api-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/38778603-kogol1/raiffeisenbank-premium-api-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/38778603-kogol1/raiffeisenbank-premium-api-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/38778603-kogol1/raiffeisenbank-premium-api-laravel.svg?style=flat-square)](https://packagist.org/packages/38778603-kogol1/raiffeisenbank-premium-api-laravel)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kogol1/raiffeisenbank-premium-api-laravel.svg?style=flat-square)](https://packagist.org/packages/kogol1/raiffeisenbank-premium-api-laravel)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kogol1/raiffeisenbank-premium-api-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kogol1/raiffeisenbank-premium-api-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/kogol1/raiffeisenbank-premium-api-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/kogol1/raiffeisenbank-premium-api-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/kogol1/raiffeisenbank-premium-api-laravel.svg?style=flat-square)](https://packagist.org/packages/kogol1/raiffeisenbank-premium-api-laravel)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Laravel API layer for Raiffeisenbank premium API. This package is a simple wrapper for Raiffeisenbank API. It allows you to get bank accounts and transactions as DTOs.
 
-## Generate Cert files from .p12
+Just with:
 
-
-
+```php
+(new BankAccount("1234567890"))->getTransactions();
+```
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require 38778603-kogol1/raiffeisenbank-premium-api-laravel
+composer require kogol1/raiffeisenbank-premium-api-laravel
 ```
+
+### Generate Cert files from .p12
+TODO: How to generate .pem files from .p12
+
+Put your .p12 file somewhere in your project and set the path in your .env file
 
 You can publish and run the migrations with:
 
@@ -32,31 +38,7 @@ You can publish the config file with:
 php artisan vendor:publish --tag="raiffeisenbank-premium-api-laravel-config"
 ```
 
-This is the contents of the published config file:
 
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="raiffeisenbank-premium-api-laravel-views"
-```
-
-## Usage
-
-```php
-$raiffeisenbankPremiumApiLaravel = new Kogol1\RaiffeisenbankPremiumApiLaravel();
-echo $raiffeisenbankPremiumApiLaravel->echoPhrase('Hello, Kogol1!');
-```
-
-## Testing
-
-```bash
-composer test
-```
 
 ## Changelog
 

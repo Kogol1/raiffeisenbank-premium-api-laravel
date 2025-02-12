@@ -1,6 +1,6 @@
 <?php
 
-namespace Kogol1\RaiffeisenbankPremiumApiLaravel\Api;
+namespace Kogol1\RaiffeisenbankPremiumApiLaravel\Data;
 
 class Transaction
 {
