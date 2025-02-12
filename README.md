@@ -12,6 +12,12 @@ Just with:
 ```php
 (new BankAccount("1234567890"))->getTransactions();
 ```
+
+## Requirements
+php 8.2+
+
+Laravel 11.0+
+
 ## Installation
 
 You can install the package via composer:
