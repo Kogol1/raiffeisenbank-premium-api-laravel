@@ -29,7 +29,7 @@ class BankAccount
     public function getTransactions(?string $from = null, ?string $to = null, ?int $page = null): self
     {
 
-        $this->transactions = (new ApiClient)->getTransactions($this->accountNumber, 'CZK',$from, $to, $page);
+        $this->transactions = (new ApiClient)->getTransactions($this->accountNumber, 'CZK', $from, $to, $page);
 
         return $this;
     }

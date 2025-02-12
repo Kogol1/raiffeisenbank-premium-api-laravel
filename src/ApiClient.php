@@ -5,8 +5,8 @@ namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\Transaction;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\BankAccount;
+use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\Transaction;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\CertificateIsInvalidException;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\RateLimitExceededException;
 
@@ -88,10 +88,10 @@ class ApiClient
 
         if ($response->failed()) {
             match ($response->status()) {
-                401 => throw new CertificateIsInvalidException(),
+                401 => throw new CertificateIsInvalidException,
                 403 => throw new \Exception('No access rights to perform the operation.'),
-                429 => throw new RateLimitExceededException(),
-                default => throw new \Exception("RB request failed: ".$response->json('error')),
+                429 => throw new RateLimitExceededException,
+                default => throw new \Exception('RB request failed: '.$response->json('error')),
             };
         }
 
