@@ -7,6 +7,8 @@
 
 Laravel API layer for Raiffeisenbank premium API. This package is a simple wrapper for Raiffeisenbank API. It allows you to get bank accounts and transactions as DTOs.
 
+Based on [Raiffeisenbank CZ API](https://developers.rb.cz/premium/documentation/02rbczpremiumapi_sandbox)
+
 Just with:
 
 ```php
@@ -14,9 +16,9 @@ Just with:
 ```
 
 ## Requirements
-php 8.2+
+php 8.2 and higher
 
-Laravel 11.0+
+Laravel 11.0 and higher
 
 ## Installation
 
