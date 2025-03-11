@@ -2,7 +2,6 @@
 
 namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Commands\RaiffeisenbankPremiumApiLaravelCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -12,7 +11,6 @@ class RaiffeisenbankPremiumApiLaravelServiceProvider extends PackageServiceProvi
     {
         $package
             ->name('raiffeisenbank-premium-api-laravel')
-            ->hasConfigFile()
-            ->hasCommand(RaiffeisenbankPremiumApiLaravelCommand::class);
+            ->hasConfigFile();
     }
 }
