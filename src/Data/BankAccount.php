@@ -12,11 +12,7 @@ class BankAccount
 
     public float $balance;
 
-    public function __construct(
-        public string $accountNumber,
-        public string $bankCode,
-        public string $iban,
-    ) {}
+    public function __construct(public string $accountNumber) {}
 
     /** TODO: Implement balance api call */
     public function getBalance(): self

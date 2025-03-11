@@ -22,21 +22,6 @@ class ApiClient
         $this->sandbox = config('raiffeisenbank-premium-api-laravel.use_sandbox');
     }
 
-    public function getAccounts(): Collection
-    {
-        $url = 'rbcz/premium/%environment%/accounts';
-
-        $response = collect($this->get($url)['accounts']);
-
-        $accounts = collect();
-
-        foreach ($response as $account) {
-            $accounts->push(new BankAccount(accountNumber: $account['accountNumber'], bankCode: $account['bankCode'], iban: $account['iban']));
-        }
-
-        return $accounts;
-    }
-
     public function getTransactions(string $accountNumber, string $currencyCode, ?string $from = null, ?string $to = null, ?int $page = null): Collection
     {
         /** $from is required parameter, you can see only transaction which are not older than 90 days */
