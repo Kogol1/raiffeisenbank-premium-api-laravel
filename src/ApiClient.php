@@ -5,7 +5,6 @@ namespace Kogol1\RaiffeisenbankPremiumApiLaravel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\BankAccount;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Data\Transaction;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\CertificateIsInvalidException;
 use Kogol1\RaiffeisenbankPremiumApiLaravel\Exceptions\RateLimitExceededException;
