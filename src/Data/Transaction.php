@@ -7,9 +7,9 @@ class Transaction
     public function __construct(
         public string $reference,
         public string $bankTransactionCode,
-        public string $originAccount,
-        public string $originBankCode,
-        public string $originAccountHolderName,
+        public string $counterPartyAccount,
+        public string $counterPartyBankCode,
+        public string $counterPartyName,
         public string $date,
         public string $amount,
         public string $variableSymbol = '',
@@ -25,9 +25,9 @@ class Transaction
         return new self(
             reference: $transaction['entryReference'],
             bankTransactionCode: $transaction['bankTransactionCode']['code'],
-            originAccount: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['account']['accountNumber'],
-            originBankCode: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['organisationIdentification']['bankCode'],
-            originAccountHolderName: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name'] ?? '',
+            counterPartyAccount: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['account']['accountNumber'],
+            counterPartyBankCode: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['organisationIdentification']['bankCode'],
+            counterPartyName: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name'] ?? '',
             date: $transaction['valueDate'],
             amount: $transaction['amount']['value'],
             variableSymbol: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['creditorReferenceInformation']['variable'] ?? '',
@@ -35,7 +35,7 @@ class Transaction
             specificSymbol: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['creditorReferenceInformation']['specific'] ?? '',
             currency: $transaction['amount']['currency'],
             type: $transaction['creditDebitIndication'],
-            message: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['originatorMessage'],
+            message: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['originatorMessage'] ?? '',
         );
     }
 }
