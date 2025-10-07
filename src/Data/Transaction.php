@@ -7,8 +7,8 @@ class Transaction
     public function __construct(
         public string $reference,
         public string $bankTransactionCode,
-        public string $counterPartyAccount = '',
-        public string $counterPartyBankCode = '',
+        public string $counterPartyAccount,
+        public string $counterPartyBankCode,
         public string $counterPartyName,
         public string $date,
         public string $amount,
@@ -18,8 +18,7 @@ class Transaction
         public string $currency = 'CZK',
         public string $type = '',
         public string $message = '',
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $transaction): self
     {
