@@ -7,8 +7,8 @@ class Transaction
     public function __construct(
         public string $reference,
         public string $bankTransactionCode,
-        public string $counterPartyAccount,
-        public string $counterPartyBankCode,
+        public string $counterPartyAccount = '',
+        public string $counterPartyBankCode = '',
         public string $counterPartyName,
         public string $date,
         public string $amount,
@@ -18,16 +18,19 @@ class Transaction
         public string $currency = 'CZK',
         public string $type = '',
         public string $message = '',
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $transaction): self
     {
         return new self(
             reference: $transaction['entryReference'],
             bankTransactionCode: $transaction['bankTransactionCode']['code'],
-            counterPartyAccount: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['account']['accountNumber'],
-            counterPartyBankCode: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['organisationIdentification']['bankCode'],
-            counterPartyName: $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name'] ?? '',
+            counterPartyAccount: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']) ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['account']['accountNumber'] : '',
+            counterPartyBankCode: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']) ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['organisationIdentification']['bankCode'] : '',
+            counterPartyName: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty'])
+                ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name']
+                : $transaction['entryDetails']['transactionDetails']['remittanceInformation']['unstructured'] ?? '',
             date: $transaction['valueDate'],
             amount: $transaction['amount']['value'],
             variableSymbol: $transaction['entryDetails']['transactionDetails']['remittanceInformation']['creditorReferenceInformation']['variable'] ?? '',
