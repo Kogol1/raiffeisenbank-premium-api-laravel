@@ -27,7 +27,7 @@ class Transaction
             bankTransactionCode: $transaction['bankTransactionCode']['code'],
             counterPartyAccount: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']) ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['account']['accountNumber'] : '',
             counterPartyBankCode: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']) ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['organisationIdentification']['bankCode'] : '',
-            counterPartyName: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty'])
+            counterPartyName: isset($transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name'])
                 ? $transaction['entryDetails']['transactionDetails']['relatedParties']['counterParty']['name']
                 : $transaction['entryDetails']['transactionDetails']['remittanceInformation']['unstructured'] ?? '',
             date: $transaction['valueDate'],
