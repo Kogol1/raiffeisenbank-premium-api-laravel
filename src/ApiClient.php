@@ -52,16 +52,32 @@ class ApiClient
         return $transactions;
     }
 
+    private function resolvePath(string $path): string
+    {
+        if (str_starts_with($path, '~/')) {
+            return preg_replace('/^~/', (string) ($_SERVER['HOME'] ?? posix_getpwuid(posix_getuid())['dir']), $path);
+        }
+
+        if (! str_starts_with($path, '/')) {
+            return base_path($path);
+        }
+
+        return $path;
+    }
+
     private function get($url)
     {
         $url = str_replace('%environment%', $this->sandbox ? 'mock' : 'api', $url);
+
+        $certPath = $this->resolvePath(config('raiffeisenbank-premium-api-laravel.cert_file_path'));
+        $sslKeyPath = $this->resolvePath(config('raiffeisenbank-premium-api-laravel.ssl_key_file_path'));
 
         $response = Http::acceptJson()
             ->contentType('application/json')
             ->withOptions([
                 'base_uri' => $this->baseUrl,
-                'cert' => [config('raiffeisenbank-premium-api-laravel.cert_file_path'), config('raiffeisenbank-premium-api-laravel.cert_password')],
-                'ssl_key' => config('raiffeisenbank-premium-api-laravel.ssl_key_file_path'),
+                'cert' => [$certPath, config('raiffeisenbank-premium-api-laravel.cert_password')],
+                'ssl_key' => $sslKeyPath,
             ])
             ->withHeaders([
                 'X-IBM-Client-Id' => config('raiffeisenbank-premium-api-laravel.client_id'),
